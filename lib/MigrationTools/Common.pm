@@ -58,6 +58,7 @@ our @EXPORT = qw(
     ldif_entry
     open_files
     parse_args
+    uniq
 );
 
 # default owner
@@ -250,17 +251,21 @@ sub domain_expand {
 
 # case insensitive unique
 sub uniq {
-	my $name = shift(@_);
-	my @vec = sort({uc($a) cmp uc($b)} @_);
+	my $name = shift;
+	my @list = @_;
+
 	my @ret;
-	my ($next, $last);
-	foreach $next (@vec) {
+
+	my $next;
+    my $last = "";
+	foreach $next (@list) {
 		if (uc($next) ne uc($last) &&
 		    uc($next) ne uc($name)) {
 			push (@ret, $next);
 		}
 		$last = $next;
 	}
+
 	return @ret;
 }
 

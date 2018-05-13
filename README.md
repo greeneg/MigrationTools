@@ -25,6 +25,11 @@ These tools require a UNIX or UNIX-like host to run on, and must have the
 following tools installed to run correctly:
 
 * Perl, version 5.24 or greater
+* The following Perl Modules:
+  - Net::Domain::TLD
+  - File::Basename
+  - Getopt::Long
+  - Exporter
 * OpenLDAP tools
 
 You need perl to run these.
