@@ -1,0 +1,28 @@
+#ident $Id: Make.rules,v 1.6 2002/08/12 16:40:10 lukeh Exp $
+
+TOOLS= \
+	migrate_aliases.pl \
+	migrate_automount.pl \
+	migrate_fstab.pl \
+	migrate_group.pl \
+	migrate_passwd.pl \
+	migrate_hosts.pl \
+	migrate_networks.pl \
+	migrate_profile.pl \
+	migrate_protocols.pl \
+	migrate_rpc.pl \
+	migrate_services.pl \
+	migrate_netgroup.pl \
+	migrate_netgroup_byhost.pl \
+	migrate_netgroup_byuser.pl \
+	migrate_all_offline.sh \
+	migrate_all_nis_offline.sh \
+	migrate_all_netinfo_offline.sh \
+	migrate_all_nisplus_offline.sh \
+	migrate_all_online.sh \
+	migrate_all_nis_online.sh \
+	migrate_all_netinfo_online.sh \
+	migrate_all_nisplus_online.sh \
+	migrate_base.pl \
+	migrate_slapd_conf.pl
+
