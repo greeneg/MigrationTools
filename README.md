@@ -1,12 +1,31 @@
 # MigrationTools
+
 Migrate a machine's NSS configuration to LDAP
 
-THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY AND
-WITHOUT SUPPORT.
+This code is forked from the MigrationTools sources found [here](https://www.padl.com/OSS/MigrationTools.html).
+
+These tools have been rewritten for modern Perl conventions. Older technologies
+that cannot be tested against have been removed, specifically NIS+ and NetInfo.
+
+Additionally, offline support has been removed, as ldif2ldbm is no longer part
+of the OpenLDAP releases.
+
+---
+
+<b>THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY OR
+SUPPORT.</b>
 
 These tools are freely redistributable according to the license included
 with the source files. They may be bundled with LDAP/NIS migration products.
 See RFC 2307 for more information.
+
+## Requirements
+
+These tools require a UNIX or UNIX-like host to run on, and must have the 
+following tools installed to run correctly:
+
+* Perl, version 5.24 or greater
+* OpenLDAP tools
 
 You need perl to run these.
 
@@ -19,7 +38,9 @@ site-specific variables to reflect your installation:
 Then run the tools on each of your /etc database files, eg.
 to migrate protocols you might do:
 
+```bash
 ./migrate_protocols.pl /etc/protocols protocols.ldif
+```
 
 where the first argument is the input file and the last argument
 is the output file. You then can concatenate all your output files
@@ -29,18 +50,12 @@ offline import tool (such as ldapadd and slapadd, respectively).
 The following table will tell you which migration shell script
 to use:
 
-| Script | Existing nameservice | LDAP online |
-| --- | --- | --- |
-| migrate_all_online.sh | /etc flat files | YES |
-| migrate_all_offline.sh | /etc flat files | NO |
-| migrate_all_netinfo_online.sh | NetInfo | YES |
-| migrate_all_netinfo_offline.sh | NetInfo | NO |
-| migrate_all_nis_online.sh | Sun NIS/YP | YES |
-| migrate_all_nis_offline.sh | Sun NIS/YP | NO |
-| migrate_all_nisplus_online.sh | Sun NIS+ | YES |
-| migrate_all_nisplus_offline.sh | Sun NIS+ | NO |
+| Script | Existing nameservice |
+| --- | --- |
+| migrate_all_online.sh | /etc flat files |
+| migrate_all_nis_online.sh | Sun NIS/YP |
 
-(The online scripts use ldapadd; the offline scripts use ldif2ldbm.)
+The online scripts use ldapadd.
 
 MigrationTools Copyright (C) 1996-2001 Luke Howard. All rights reserved. 
 Heavily modified for modern Perl environments by Gary Greene
