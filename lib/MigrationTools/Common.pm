@@ -52,6 +52,7 @@ our @EXPORT = qw(
     $DEFAULT_OWNER
     $DEFAULT_REALM
     $EXTENDED_SCHEMA
+    escape_metacharacters
     getsuffix
     get_nc
     get_classmap
@@ -315,7 +316,7 @@ sub ldif_entry {
 # <apthorpe@cynistar.net> to solve problems with embedded plusses in
 # protocols and mail aliases.
 sub escape_metacharacters {
-    my $name = @_;
+    my $name = shift;
 
 	# From Table 3.1 "Characters Requiring Quoting When Contained
 	# in Distinguished Names", p87 "Understanding and Deploying LDAP
