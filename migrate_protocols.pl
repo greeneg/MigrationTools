@@ -47,26 +47,26 @@ use lib './lib';
 use MigrationTools::Common;
 
 my sub dump_protocol {
-	my ($fh, $name, $number, $alias, $description, $basedn) = @_;
+    my ($fh, $name, $number, $alias, $description, $basedn) = @_;
     return if $name eq "use";
 
     my @aliases = @{$alias};
 
-	my $dname = escape_metacharacters($name);
-	print $fh "dn: cn=$dname,$basedn\n";
-	print $fh "objectClass: ipProtocol\n";
-	print $fh "objectClass: top\n";
-	# workaround typo in RFC 2307 where description
-	# was made MUST instead of MAY
-	print $fh "description: $description\n";
-	print $fh "ipProtocolNumber: $number\n";
-	print $fh "cn: $name\n";
-	@aliases = uniq($name, @aliases);
-	foreach my $_alias (@aliases) {
+    my $dname = escape_metacharacters($name);
+    print $fh "dn: cn=$dname,$basedn\n";
+    print $fh "objectClass: ipProtocol\n";
+    print $fh "objectClass: top\n";
+    # workaround typo in RFC 2307 where description
+    # was made MUST instead of MAY
+    print $fh "description: $description\n";
+    print $fh "ipProtocolNumber: $number\n";
+    print $fh "cn: $name\n";
+    @aliases = uniq($name, @aliases);
+    foreach my $_alias (@aliases) {
         $_alias = uc($_alias);
-		print $fh "cn: $_alias\n";
-	}
-	print $fh "\n";
+        print $fh "cn: $_alias\n";
+    }
+    print $fh "\n";
 }
 
 our sub main {
