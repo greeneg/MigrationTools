@@ -52,7 +52,7 @@ my sub dump_mount {
 	my ($HANDLE, $fsname, $fsdir, $type, $opts, $freq, $passno, $basedn) = @_;
 	my (@options) = split(/,/, $opts);
 
-	print $HANDLE "dn: cn=$fsname,$basedn\n";
+	print $HANDLE "dn: cn=$fsname,$basedn,$DEFAULT_BASE\n";
 	print $HANDLE "cn: $fsname\n";
 	print $HANDLE "objectClass: mount\n";
 	print $HANDLE "objectClass: top\n";
@@ -74,7 +74,6 @@ my sub dump_mount {
 our sub main {
     my $program = basename($0);
     my $basedn = getsuffix($program);
-    my $naming_context = get_nc();
 
     my ($in, $out) = parse_args(@ARGV);
     my ($use_stdout, $in_fh, $out_fh) = open_files($in, $out);
