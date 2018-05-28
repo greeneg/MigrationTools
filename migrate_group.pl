@@ -51,7 +51,7 @@ my sub dump_group {
 
     my @members = split(/,/, $users);
 
-    print $fh "dn: cn=$group,$basedn\n";
+    print $fh "dn: cn=$group,$basedn,$DEFAULT_BASE\n";
     print $fh "objectClass: posixGroup\n";
     print $fh "objectClass: top\n";
     print $fh "cn: $group\n";
