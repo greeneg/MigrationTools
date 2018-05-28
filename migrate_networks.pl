@@ -53,7 +53,7 @@ sub dump_network {
 
 	my $cn = $networkname; # could be $revnetwork
 
-	print $fh "dn: cn=$networkname,$basedn\n";
+	print $fh "dn: cn=$networkname,$basedn,$DEFAULT_BASE\n";
 	print $fh "objectClass: ipNetwork\n";
 	print $fh "objectClass: top\n";
 	print $fh "ipNetworkNumber: $networkaddr\n";
