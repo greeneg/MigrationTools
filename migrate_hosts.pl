@@ -52,7 +52,7 @@ my sub dump_host {
 
 	return if (!$hostaddr);
 
-	print $fh "dn: cn=$hostname,$basedn\n";
+	print $fh "dn: cn=$hostname,$basedn,$DEFAULT_BASE\n";
 	print $fh "objectClass: top\n";
 	print $fh "objectClass: ipHost\n";
 	print $fh "objectClass: device\n";
