@@ -49,7 +49,7 @@ my sub dump_rpc {
 
 	return if (! $rpcname);
 
-	print $fh "dn: cn=$rpcname,$basedn\n";
+	print $fh "dn: cn=$rpcname,$basedn,$DEFAULT_BASE\n";
 	print $fh "objectClass: oncRpc\n";
 	print $fh "objectClass: top\n";
 	# workaround typo in RFC 2307 where description
