@@ -167,7 +167,7 @@ sub build_service_records {
             # Finally we build LDIF records for services.
             push(@records, "dn: cn=" . escape_metacharacters($service)
 				. $suffix
-				. ",$basedn\n"
+				. ",$basedn,$DEFAULT_BASE\n"
 				. "objectClass: ipService\n"
 				. "objectClass: top\n"
 				. "ipServicePort: $port\n"
