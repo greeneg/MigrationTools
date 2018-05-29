@@ -53,7 +53,7 @@ my sub dump_protocol {
     my @aliases = @{$alias};
 
     my $dname = escape_metacharacters($name);
-    print $fh "dn: cn=$dname,$basedn\n";
+    print $fh "dn: cn=$dname,$basedn,$DEFAULT_BASE\n";
     print $fh "objectClass: ipProtocol\n";
     print $fh "objectClass: top\n";
     # workaround typo in RFC 2307 where description
