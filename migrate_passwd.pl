@@ -93,7 +93,7 @@ my sub dump_user {
 	pop(@tmp);
 	$givenname = join(' ', @tmp);
 	
-	print $fh "dn: uid=$user,$basedn\n";
+	print $fh "dn: uid=$user,$basedn,$DEFAULT_BASE\n";
 	print $fh "uid: $user\n";
 	print $fh "cn: $cn\n";
 
@@ -129,19 +129,24 @@ my sub dump_user {
 	print $fh "objectClass: posixAccount\n";
 	print $fh "objectClass: top\n";
 
-	if ($DEFAULT_REALM) {
-		print $fh "objectClass: kerberosSecurityObject\n";
-	}
+    if ($uid == 0 || $uid >= 1000) {
+	    if ($DEFAULT_REALM) {
+		    print $fh "objectClass: kerberosSecurityObject\n";
+	    }
 
-	if ($shadow_users{$user} ne "") {
-		dump_shadow_attributes($fh, split(/:/, $shadow_users{$user}));
-	} else {
-		print $fh "userPassword: {crypt}$pwd\n";
-	}
+        # only do this if not in a krb5 realm
+        unless (defined $DEFAULT_REALM) {
+            if ($shadow_users{$user} ne "") {
+                dump_shadow_attributes($fh, split(/:/, $shadow_users{$user}));
+            } else {
+                print $fh "userPassword: {crypt}$pwd\n";
+            }
+        }
 
-	if ($DEFAULT_REALM) {
-		print $fh "krbName: $user\@$DEFAULT_REALM\n";
-	}
+        if ($DEFAULT_REALM) {
+            print $fh "krbName: $user\@$DEFAULT_REALM\n";
+        }
+    }
 
 	if ($shell) {
 		print $fh "loginShell: $shell\n";

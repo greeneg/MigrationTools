@@ -40,7 +40,11 @@ package MigrationTools::Common;
 use strict;
 use warnings;
 
+use feature ":5.24";
+
+use Config::IniFiles;
 use File::Basename;
+use Cwd;
 
 use Exporter;
 
@@ -62,25 +66,32 @@ our @EXPORT = qw(
     uniq
 );
 
+# load our configuration file
+my $prefix = getcwd();
+my $cfg = Config::IniFiles->new(
+    -file => "$prefix/config.ini",
+    -default => "Defaults",
+);
+
 # default owner
 our $DEFAULT_OWNER;
 
 # default Krb5 realm
-our $DEFAULT_REALM;
+our $DEFAULT_REALM = $cfg->val('Defaults', 'Krb5_Realm');
 
 # Default DNS domain
-our $DEFAULT_MAIL_DOMAIN = "padl.com";
+our $DEFAULT_MAIL_DOMAIN = $cfg->val('Defaults', 'Mail_Domain');
 
 # Default base 
-our $DEFAULT_BASE = "dc=padl,dc=com";
+our $DEFAULT_BASE = $cfg->val('Defaults', 'Base');
 
 # where /etc/mail/ldapdomains contains names of ldap_routed
 # domains (similiar to MASQUERADE_DOMAIN_FILE).
-our $DEFAULT_MAIL_HOST = "mail.padl.com";
+our $DEFAULT_MAIL_HOST = $cfg->val('Defaults', 'Mail_Host');
 
 # turn this on to support more general object clases
 # such as person.
-our $EXTENDED_SCHEMA = 0;
+our $EXTENDED_SCHEMA = $cfg->val('Defaults', 'Extended_Schema');
 
 # Naming contexts. Key is $PROGRAM with migrate_ and .pl 
 # stripped off. 
